@@ -1,8 +1,21 @@
 ﻿class Sand {
-    color = "#ffe855";
+    color = "#c9c530";
     updated = false;
-    solidity = 3;
+    solidity = 9;
 
+    constructor() {
+        switch (Math.round(Math.random() * 3)) {
+            case 0: this.color = "#ffe600";
+                break;
+            case 1: this.color = "#f5dc00";
+                break;
+            case 2: this.color = "#ebd200";
+                break;
+            case 3: this.color = "#e1c800";
+                break;
+        }
+    }
+    
     Update(x, y) {
         if (this.updated === true){
             return;

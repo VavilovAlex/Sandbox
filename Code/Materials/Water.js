@@ -1,8 +1,21 @@
 ﻿class Water {
     color = "#2254ff";
     updated = false;
-    solidity = 2;
+    solidity = 5;
 
+    constructor() {
+        switch (Math.round(Math.random() * 3)) {
+            case 0: this.color = "#0000ff";
+                break;
+            case 1: this.color = "#0000c8";
+                break;
+            case 2: this.color = "#0032ff";
+                break;
+            case 3: this.color = "#0032c8";
+                break;
+        }
+    }
+    
     Update(x, y) {
         if (this.updated === true){
             return;

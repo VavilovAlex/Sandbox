@@ -3,6 +3,17 @@
     updated = false;
     solidity = 1;
 
+    constructor() {
+        switch (Math.round(Math.random() * 2)) {
+            case 0: this.color = "#c8c8c8";
+                break;
+            case 1: this.color = "#bebebe";
+                break;
+            case 2: this.color = "#b4b4b4";
+                break;
+        }
+    }
+    
     Update(x, y) {
         if (this.updated === true){
             return;
