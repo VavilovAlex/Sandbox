@@ -8,20 +8,30 @@
 <body>
     <canvas id="canvas">
     </canvas>
-    <Button onclick="SetSand()";
+    <Button onclick="SetMaterial('Sand')"
             style="
             margin-top: 10px; 
             margin-left: 10px">Sand</Button>
 
-    <Button onclick="SetWater()";
+    <Button onclick="SetMaterial('Water')"
             style="
             margin-top: 10px; 
             margin-left: 10px">Water</Button>
 
-    <Button onclick="SetWood()";
+    <Button onclick="SetMaterial('Wood')"
             style="
             margin-top: 10px; 
             margin-left: 10px">Wood</Button>
+
+    <Button onclick="SetMaterial('Air')"
+            style="
+            margin-top: 10px; 
+            margin-left: 10px">Air</Button>
+
+    <Button onclick="ClearWorld()"
+            style="
+            margin-top: 10px; 
+            margin-left: 10px">Clear</Button>
 
     <script src="main.js"></script>
 </body>

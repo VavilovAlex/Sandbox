@@ -4,8 +4,8 @@ const context = canvas.getContext('2d');
 canvas.width = innerWidth;
 canvas.height = innerHeight - 100;
 
-let y_mult = 2;
-let x_mult = 2;
+let y_mult = 4;
+let x_mult = 4;
 
 height = Math.floor(canvas.height / y_mult);
 width = Math.floor(canvas.width / x_mult);
@@ -35,8 +35,12 @@ class Air
 {
     color = "#ffffff";
     solidity = 0;
-    
-    Update() {}
+
+    Update(x, y) {
+        if(!this.drawn)
+            Draw(x,y);
+        this.drawn = true;
+    }
 }
 
 class Wood
@@ -128,32 +132,31 @@ class Water {
 }
 
 let isDrawing = false;
-let x = 0;
-let y = 0;
+let mouse_x = 0;
+let mouse_y = 0;
 
 canvas.addEventListener('mousedown', e => {
-    x = e.offsetX;
-    y = e.offsetY;
+    mouse_x = e.offsetX;
+    mouse_y = e.offsetY;
     isDrawing = true;
 });
 
 canvas.addEventListener('mousemove', e => {
     if (isDrawing === true) {
-        x = e.offsetX;
-        y = e.offsetY;
+        mouse_x = e.offsetX;
+        mouse_y = e.offsetY;
     }
 });
 
 window.addEventListener('mouseup', e => {
     if (isDrawing === true) {
-        x = 0;
-        y = 0;
+        mouse_x = 0;
+        mouse_y = 0;
         isDrawing = false;
     }
 });
 
 function UpdateWorld() {
-    DrawWithMouse();
     
     for (let x = 0; x < width; x++) {
         for (let y = 0; y < height; y++) {
@@ -174,51 +177,35 @@ function UpdateWorld() {
     }
 }
 
+function ClearWorld() {
+    for (let x = 0; x < width; x++) {
+        world[x] = [];
+        for (let y = 0; y < height; y++) {
+            world[x][y] = new Air();
+        }
+    }
+}
+
 let world = [];
 
-for (let x = 0; x < width; x++) {
-    world[x] = [];
-    for (let y = 0; y < height; y++) {
-        world[x][y] = new Air();
-    }
-}
-
-for (let j = 0; j < 50; j++) {
-    for (let i = 0; i < 40; i++) {
-        if(i % 2 === 0 ^ j % 2 === 0)
-        world[30 + j][i] = new Sand();
-    } 
-}
-
-for (let j = 0; j < 50; j++) {
-    for (let i = 0; i < 40; i++) {
-        if(i % 2 === 0 ^ j % 2 === 0)
-            world[90 + j][i] = new Water();
-    }
-}
+ClearWorld();
 
 function DrawWithMouse() {
     if(isDrawing) {
-        world[x / x_mult][y / y_mult] = ParticleFactory();
-        world[x / x_mult + 1][y / y_mult] = ParticleFactory();
-        world[x / x_mult - 1][y / y_mult] = ParticleFactory();
-        world[x / x_mult][y / y_mult + 1] = ParticleFactory();
-        world[x / x_mult][y / y_mult - 1] = ParticleFactory();
+        let x = Math.floor(mouse_x / x_mult);
+        let y = Math.floor(mouse_y / y_mult);
+        world[x][y] = ParticleFactory();
+        world[x + 1][y] = ParticleFactory();
+        world[x - 1][y] = ParticleFactory();
+        world[x][y + 1] = ParticleFactory();
+        world[x][y - 1] = ParticleFactory();
     }
 }
 
 let type = "Sand";
 
-function SetWater() {
-    type = "Water";
-}
-
-function SetSand() {
-    type = "Sand";
-}
-
-function SetWood() {
-    type = "Wood";
+function SetMaterial(input) {
+    type = input;
 }
 
 function ParticleFactory() {
@@ -226,7 +213,10 @@ function ParticleFactory() {
         case "Sand": return new Sand();
         case "Water": return new Water();
         case "Wood": return new Wood();
+        case "Air": return new Air();
     }
 }
 
-let interval = setInterval(UpdateWorld, 10)
+let interval = setInterval(UpdateWorld, 10);
+let interval2 = setInterval(DrawWithMouse, 10);
+
