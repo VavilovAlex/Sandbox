@@ -1,4 +1,4 @@
-﻿class Water {
+﻿class Steam {
     color = "#878787";
     updated = false;
     solidity = 1;
