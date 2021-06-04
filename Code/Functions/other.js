@@ -30,5 +30,7 @@ function ParticleFactory() {
         case "Wood": return new Wood();
         case "Air": return new Air();
         case "Steam": return new Steam();
+        case "Fire": return new Fire();
+        case "Smoke": return new Smoke();
     }
 }

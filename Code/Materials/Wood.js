@@ -3,7 +3,9 @@
     color = "#823804";
     solidity = 10;
     drawn = false;
-
+    flammable = true;
+    hp = 100;
+    
     constructor() {
         switch (Math.round(Math.random() * 2)) {
             case 0: this.color = "#422d21";
