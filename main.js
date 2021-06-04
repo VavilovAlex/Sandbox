@@ -182,10 +182,16 @@ for (let j = 0; j < 50; j++) {
     }
 }
 
-function Draw() {
-    if(isDrawing)
+function DrawWithMouse() {
+    if(isDrawing) {
         world[x / x_mult][y / y_mult] = new Sand();
+        world[x / x_mult + 1][y / y_mult] = new Sand();
+        world[x / x_mult - 1][y / y_mult] = new Sand();
+        world[x / x_mult][y / y_mult + 1] = new Sand();
+        world[x / x_mult][y / y_mult - 1] = new Sand();
+
+    }
 }
 
 let interval = setInterval(UpdateWorld, 10)
-let interval2 = setInterval(Draw, 10)
+let interval2 = setInterval(DrawWithMouse, 100)
