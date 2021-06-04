@@ -2,7 +2,7 @@
 const context = canvas.getContext('2d');
 
 canvas.width = innerWidth;
-canvas.height = innerHeight - 40;
+canvas.height = innerHeight - 100;
 
 let y_mult = 2;
 let x_mult = 2;
