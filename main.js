@@ -114,10 +114,30 @@ class Water {
     }
 }
 
-function MouseMove()
-{
-    
-}
+let isDrawing = false;
+let x = 0;
+let y = 0;
+
+canvas.addEventListener('mousedown', e => {
+    x = e.offsetX;
+    y = e.offsetY;
+    isDrawing = true;
+});
+
+canvas.addEventListener('mousemove', e => {
+    if (isDrawing === true) {
+        x = e.offsetX;
+        y = e.offsetY;
+    }
+});
+
+window.addEventListener('mouseup', e => {
+    if (isDrawing === true) {
+        x = 0;
+        y = 0;
+        isDrawing = false;
+    }
+});
 
 function UpdateWorld() {
     for (let x = 0; x < width; x++) {
@@ -162,5 +182,10 @@ for (let j = 0; j < 50; j++) {
     }
 }
 
+function Draw() {
+    if(isDrawing)
+        world[x / x_mult][y / y_mult] = new Sand();
+}
 
 let interval = setInterval(UpdateWorld, 10)
+let interval2 = setInterval(Draw, 10)
