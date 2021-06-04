@@ -29,5 +29,6 @@ function ParticleFactory() {
         case "Water": return new Water();
         case "Wood": return new Wood();
         case "Air": return new Air();
+        case "Steam": return new Steam();
     }
 }
