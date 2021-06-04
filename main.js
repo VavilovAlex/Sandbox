@@ -2,7 +2,7 @@
 const context = canvas.getContext('2d');
 
 canvas.width = innerWidth;
-canvas.height = innerHeight;
+canvas.height = innerHeight - 40;
 
 let y_mult = 2;
 let x_mult = 2;
@@ -37,6 +37,19 @@ class Air
     solidity = 0;
     
     Update() {}
+}
+
+class Wood
+{
+    color = "#823804";
+    solidity = 3;
+    drawn = false;
+    
+    Update(x, y) {
+        if(!this.drawn)
+            Draw(x,y);
+        this.drawn = true;
+    }
 }
 
 class Sand {
@@ -140,6 +153,8 @@ window.addEventListener('mouseup', e => {
 });
 
 function UpdateWorld() {
+    DrawWithMouse();
+    
     for (let x = 0; x < width; x++) {
         for (let y = 0; y < height; y++) {
             world[x][y].updated = false;
@@ -184,14 +199,34 @@ for (let j = 0; j < 50; j++) {
 
 function DrawWithMouse() {
     if(isDrawing) {
-        world[x / x_mult][y / y_mult] = new Sand();
-        world[x / x_mult + 1][y / y_mult] = new Sand();
-        world[x / x_mult - 1][y / y_mult] = new Sand();
-        world[x / x_mult][y / y_mult + 1] = new Sand();
-        world[x / x_mult][y / y_mult - 1] = new Sand();
+        world[x / x_mult][y / y_mult] = ParticleFactory();
+        world[x / x_mult + 1][y / y_mult] = ParticleFactory();
+        world[x / x_mult - 1][y / y_mult] = ParticleFactory();
+        world[x / x_mult][y / y_mult + 1] = ParticleFactory();
+        world[x / x_mult][y / y_mult - 1] = ParticleFactory();
+    }
+}
 
+let type = "Sand";
+
+function SetWater() {
+    type = "Water";
+}
+
+function SetSand() {
+    type = "Sand";
+}
+
+function SetWood() {
+    type = "Wood";
+}
+
+function ParticleFactory() {
+    switch (type) {
+        case "Sand": return new Sand();
+        case "Water": return new Water();
+        case "Wood": return new Wood();
     }
 }
 
 let interval = setInterval(UpdateWorld, 10)
-let interval2 = setInterval(DrawWithMouse, 100)
