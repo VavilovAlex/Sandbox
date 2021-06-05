@@ -7,11 +7,11 @@
         switch (Math.round(Math.random() * 3)) {
             case 0: this.color = "#0000ff";
                 break;
-            case 1: this.color = "#0000c8";
+            case 1: this.color = "#0000e6";
                 break;
             case 2: this.color = "#0032ff";
                 break;
-            case 3: this.color = "#0032c8";
+            case 3: this.color = "#0032e6";
                 break;
         }
     }

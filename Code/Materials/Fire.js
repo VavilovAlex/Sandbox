@@ -32,39 +32,55 @@
             world[x][y] = new Air();
         Draw(x,y);
         
-        if(world[x][y + 1].flammable)
+        if(
+            y < height - 1
+            && world[x][y + 1].flammable)
         {
             this.Ignite(x, y + 1);
         }
-        if(world[x][y - 1].flammable)
+        if(
+            y > 0
+            && world[x][y - 1].flammable)
         {
             this.Ignite(x, y - 1);
         }
-        if(world[x + 1][y].flammable)
+        if(
+            x < width - 1
+            && world[x + 1][y].flammable)
         {
             this.Ignite(x + 1, y);
         }
-        if(world[x - 1][y].flammable)
+        if(
+            x > 0
+            && world[x - 1][y].flammable)
         {
             this.Ignite(x - 1, y);
         }
 
-        if(world[x][y + 1] instanceof Water)
+        if(
+            y < height - 1
+            && world[x][y + 1] instanceof Water)
         {
             world[x][y + 1] = new Steam();
             world[x][y] = new Steam();
         }
-        if(world[x][y - 1] instanceof Water)
+        if(
+            y > 0
+            && world[x][y - 1] instanceof Water)
         {
             world[x][y - 1] = new Steam();
             world[x][y] = new Steam();
         }
-        if(world[x + 1][y] instanceof Water)
+        if(
+            x < width - 1
+            && world[x + 1][y] instanceof Water)
         {
             world[x + 1][y] = new Steam();
             world[x][y] = new Steam();
         }
-        if(world[x - 1][y] instanceof Water)
+        if(
+            x > 0
+            && world[x - 1][y] instanceof Water)
         {
             world[x - 1][y] = new Steam();
             world[x][y] = new Steam();
