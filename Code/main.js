@@ -1,5 +1,5 @@
 ﻿const canvas = document.querySelector('canvas');
-const context = canvas.getContext('2d');
+const context = canvas.getContext('2d', { alpha: false });
 
 canvas.width = innerWidth;
 canvas.height = innerHeight - 100;
@@ -15,5 +15,5 @@ let world = [];
 ClearWorld();
 
 let interval = setInterval(UpdateWorld, 10);
-let interval2 = setInterval(DrawWithMouse, 10);
+let interval2 = setInterval(DrawWithMouse, 50);
 

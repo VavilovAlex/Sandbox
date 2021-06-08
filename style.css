@@ -7,3 +7,8 @@
 body{
     margin: 0;
 }
+
+.slider {
+    height: 8px;
+    margin-top: 15px;
+}

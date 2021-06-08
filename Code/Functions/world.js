@@ -12,11 +12,11 @@
         }
     }
 
-    for (let x = width - 1; x >= 0; x--){
-        for (let y = height - 1; y >= 0; y--) {
-            world[x][y].Update(x, y);
-        }
-    }
+    // for (let x = width - 1; x >= 0; x--){
+    //     for (let y = height - 1; y >= 0; y--) {
+    //         world[x][y].Update(x, y);
+    //     }
+    // }
 }
 
 function ClearWorld() {

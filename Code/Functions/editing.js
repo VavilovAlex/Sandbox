@@ -27,10 +27,33 @@ function DrawWithMouse() {
     if(isDrawing) {
         let x = Math.floor(mouse_x / x_mult);
         let y = Math.floor(mouse_y / y_mult);
-        world[x][y] = ParticleFactory();
-        world[x + 1][y] = ParticleFactory();
-        world[x - 1][y] = ParticleFactory();
-        world[x][y + 1] = ParticleFactory();
-        world[x][y - 1] = ParticleFactory();
+        
+        let from;
+        let to;
+        
+        if(size % 2 === 0)
+        {
+            from = -(size / 2);
+            to = size / 2;
+        }
+        else
+        {
+            to = Math.floor(size / 2);
+            from = -(size - to);
+        }
+        
+        for (let i = from; i < to; i++) {
+            for (let j = from; j < to; j++) {
+                let pos_x = x + i;
+                let pos_y = y + j;
+                if(pos_x < 0) break;
+                if(pos_y < 0) continue;
+                if(pos_x > width - 1) return;
+                if(pos_y > height - 1) break;
+                if(Math.random() < density / 100)
+                    world[pos_x][pos_y] = ParticleFactory();
+
+            }
+        }
     }
 }
